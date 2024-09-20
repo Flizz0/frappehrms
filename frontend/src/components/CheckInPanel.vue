@@ -147,7 +147,12 @@ const fetchLocation = () => {
 		locationStatus.value = "Geolocation is not supported by your current browser"
 	} else {
 		locationStatus.value = "Locating..."
-		navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError)
+		const options = {
+            enableHighAccuracy: true,
+            timeout: 10000, // 10 seconds timeout
+            maximumAge: 0 // Do not use cached location
+        };
+		navigator.geolocation.getCurrentPosition(handleLocationSuccess, handleLocationError, options)
 	}
 }
 
